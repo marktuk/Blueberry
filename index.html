@@ -1,0 +1,127 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Blueberry - A simple, fluid, responsive jQuery image slider.</title>
+
+<!--
+/*
+ * jQuery Blueberry Slider v0.1 BETA
+ * http://marktyrrell.com/labs/blueberry/
+ *
+ * Copyright (C) 2011, Mark Tyrrell <me@marktyrrell.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+-->
+
+<link rel="stylesheet" href="blueberry.css" />
+<style type="text/css">
+<!--
+* {
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+body {
+	background: #f0f0f0;
+	font: 14px/20px Arial, San-Serif;
+	color: #404040;
+}
+a { color: #264c99; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1,h2,h3,h4,p { margin-bottom: 20px; }
+h1 {
+	font-size: 48px;
+	line-height: 60px;
+	color: #ffffff;
+	text-transform: lowercase;
+}
+h2, h3 {
+	font-weight: normal;
+	font-size: 22px;
+	line-height: 40px;
+	color: #808080;
+}
+h3 { font-size: 18px; color: #404040; }
+h5 { font-weight: bold; font-size: 14px; color: #000; }
+
+#header {
+	height: 60px;
+	padding-top: 20px; padding-bottom: 20px;
+	text-align: center;
+	background: #405580;
+}
+#header h1 {
+	margin: 0 auto;
+	min-width: 740px;
+	max-width: 1140px;
+}
+#doc { margin: 40px 0; }
+#content {
+	margin: 0 auto;
+	min-width: 740px;
+	max-width: 1140px;
+}
+
+.blueberry { max-width: 960px; }
+
+-->
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="jquery.blueberry.js"></script>
+
+<script>
+$(window).load(function() {
+	$('.blueberry').blueberry();
+});
+</script>
+
+</head>
+<body>
+
+<div id="header">
+  <h1><img src="http://marktyrrell.com/labs/blueberry/img/logo.png" alt="Blueberry" /></h1>
+</div>
+
+<div id="doc">
+  <div id="content">
+
+<!-- blueberry -->
+
+    <div class="blueberry">
+      <ul class="slides">
+        <li><img src="http://marktyrrell.com/labs/blueberry/img/slide1.jpg" /></li>
+        <li><img src="http://marktyrrell.com/labs/blueberry/img/slide2.jpg" /></li>
+        <li><img src="http://marktyrrell.com/labs/blueberry/img/slide3.jpg" /></li>
+        <li><img src="http://marktyrrell.com/labs/blueberry/img/slide4.jpg" /></li>
+      </ul>
+      <ul class="pager">
+        <li><a href="#"><span></span></a></li>
+        <li><a href="#"><span></span></a></li>
+        <li><a href="#"><span></span></a></li>
+        <li><a href="#"><span></span></a></li>
+      </ul>
+    </div>
+
+<!-- blueberry -->
+
+  </div>
+</div>
+
+</body>
+</html>
