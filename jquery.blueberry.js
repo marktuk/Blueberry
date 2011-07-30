@@ -1,5 +1,5 @@
 /*
- * jQuery Blueberry Slider v0.1 BETA
+ * jQuery Blueberry Slider v0.4 BETA
  * http://marktyrrell.com/labs/blueberry/
  *
  * Copyright (C) 2011, Mark Tyrrell <me@marktyrrell.com>
@@ -23,12 +23,16 @@
 	$.fn.extend({
 		blueberry: function(options) {
 
-				//default values for plugin options
-				var defaults = {
+			//default values for plugin options
+			var defaults = {
 				interval: 5000,
 				duration: 500,
 				lineheight: 1,
-				hoverpause: false
+				height: 'auto', //reserved
+				hoverpause: false,
+				pager: true,
+				nav: true, //reserved
+				keynav: true
 			}
 			var options =  $.extend(defaults, options);
  
@@ -53,12 +57,37 @@
 				var sliderWidth = 0;
 				var cropHeight = 0;
 
-				//hide all slides, fade in the first, add active class to first slide and pager li
+				//hide all slides, fade in the first, add active class to first slide
 				slides.hide().eq(current).fadeIn(o.duration).addClass('active');
-				pager.eq(current).addClass('active');
+				
+
+				//build pager if it doesn't already exist and if enabled
+				if(pager.length) {
+					pager.eq(current).addClass('active');
+				} else if(o.pager){
+					obj.append('<ul class="pager"></ul>');
+					slides.each(function(index) {
+						$('.pager', obj).append('<li><a href="#"><span>'+index+'</span></a></li>')
+					});
+					pager = $('.pager li', obj);
+					pager.eq(current).addClass('active');
+				}
+
+				//rotate to selected slide on pager click
+				if(pager){
+					$('a', pager).click(function() {
+						//stop the timer
+						clearTimeout(obj.play);
+						//set the slide index based on pager index
+						next = $(this).parent().index();
+						//rotate the slides
+						rotate();
+						return false;
+					});
+				}
 
 				//primary function to change slides
-				rotate = function(){
+				var rotate = function(){
 					//fade out current slide and remove active class,
 					//fade in next slide and add active class
 					slides.eq(current).fadeOut(o.duration).removeClass('active')
@@ -69,10 +98,12 @@
 							rotateTimer();
 							$(this).dequeue()
 					});
-	
+
 					//update pager to reflect slide change
-					pager.eq(current).removeClass('active')
-						.end().eq(next).addClass('active');
+					if(pager){
+						pager.eq(current).removeClass('active')
+							.end().eq(next).addClass('active');
+					}
 
 					//update current and next vars to reflect slide change
 					//set next as first slide if current is the last
@@ -80,8 +111,8 @@
 					next = current >= slides.length-1 ? 0 : current+1;
 				};
 				//create a timer to control slide rotation interval
-				rotateTimer = function(){
-					play = setTimeout(function(){
+				var rotateTimer = function(){
+					obj.play = setTimeout(function(){
 						//trigger slide rotate function at end of timer
 						rotate();
 					}, o.interval);
@@ -94,26 +125,15 @@
 				if(o.hoverpause){
 					slides.hover(function(){
 						//stop the timer in mousein
-						clearTimeout(play);
+						clearTimeout(obj.play);
 					}, function(){
 						//start the timer on mouseout
 						rotateTimer();
 					});
 				}
 
-				//rotate to selected slide on pager click
-				$('a', pager).click(function() {
-					//stop the timer
-					clearTimeout(play);
-					//set the slide index based on pager index
-					next = $(this).parent().index();
-					//rotate the slides
-					rotate();
-					return false;
-				});
-
 				//calculate and set height based on image width/height ratio and specified line height
-				setsize = function(){
+				var setsize = function(){
 					sliderWidth = $('.slides', obj).width();
 					cropHeight = Math.floor(((sliderWidth/imgRatio)/o.lineheight))*o.lineheight;
 
@@ -126,20 +146,35 @@
 					setsize();
 				});
 				
-				// Add keyboard navigation
-				$(document).keyup(function(e){
-					switch (e.which) {
-						case 39: case 32: // right arrow & space
-							clearTimeout(play);
-							rotate();
-							break;
-						case 37: // left arrow
-							clearTimeout(play);
-							next = current - 1;
-							rotate();
-							break;
-					}
-				});
+				
+
+				//Add keyboard navigation
+
+				if(o.keynav){
+					$(document).keyup(function(e){
+
+						switch (e.which) {
+
+							case 39: case 32: //right arrow & space
+
+								clearTimeout(obj.play);
+
+								rotate();
+
+								break;
+
+
+							case 37: // left arrow
+								clearTimeout(obj.play);
+								next = current - 1;
+								rotate();
+
+								break;
+						}
+
+					});
+				}
+
 
 			});
 		}

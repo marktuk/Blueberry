@@ -1,5 +1,5 @@
 /*
- * jQuery Blueberry Slider v0.1 BETA
+ * jQuery Blueberry Slider v0.4 BETA
  * http://marktyrrell.com/labs/blueberry/
  *
  * Copyright (C) 2011, Mark Tyrrell <me@marktyrrell.com>
@@ -51,14 +51,15 @@
 	width: 4px;
 }
 .blueberry .pager li a {
-	outline: none;
 	padding: 18px 8px;
 -webkit-border-radius: 6px;
    -moz-border-radius: 6px;
 	border-radius: 6px;
 }
 .blueberry .pager li a span {
+	overflow: hidden;
 	background: #c0c0c0;
+	text-indent: -9999px;
 -webkit-border-radius: 2px;
    -moz-border-radius: 2px;
 	border-radius: 2px;
