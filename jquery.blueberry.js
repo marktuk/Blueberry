@@ -125,6 +125,21 @@
 				$(window).resize(function(){
 					setsize();
 				});
+				
+				// Add keyboard navigation
+				$(document).keyup(function(e){
+					switch (e.which) {
+						case 39: case 32: // right arrow & space
+							clearTimeout(play);
+							rotate();
+							break;
+						case 37: // left arrow
+							clearTimeout(play);
+							next = current - 1;
+							rotate();
+							break;
+					}
+				});
 
 			});
 		}
