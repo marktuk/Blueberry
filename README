@@ -9,7 +9,7 @@ Copyright (C) 2011, Mark Tyrrell
 
 Changelog:
 
-v0.4 30-07-2011
+v0.4	30-07-2011	Bug fixes and new features
 	- Function added to automatically build the pager with an option to enable/disable
 	- Bug fixed to allow multiple sliders on a single page
 	- Keyboard navigation added (contrib. cbarnes0981)
